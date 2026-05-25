@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Users, Briefcase, TrendingUp, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { t } from '@/lib/i18n';
 
 export default function AdminPage() {
   const router = useRouter();
@@ -19,20 +20,20 @@ export default function AdminPage() {
         } = await supabase.auth.getSession();
 
         if (!session?.user) {
-          router.push('/auth/login');
+          router.push('/login');
           return;
         }
 
         // Check if user is admin email
         if (session.user.email !== 'ca.markode@gmail.com') {
-          toast.error('Unauthorized access');
+          toast.error(t('common.unauthorized') ?? 'Unauthorized access');
           router.push('/');
           return;
         }
 
         setAuthorized(true);
       } catch (error) {
-        toast.error('Error checking access');
+        toast.error(t('common.error') ?? 'Error checking access');
         router.push('/');
       } finally {
         setLoading(false);
@@ -66,10 +67,10 @@ export default function AdminPage() {
       {/* Header */}
       <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-8">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-          Admin Dashboard
+          {t('admin.title')}
         </h1>
         <p className="text-slate-600 dark:text-slate-400">
-          Manage platform content and users
+          {t('admin.subtitle')}
         </p>
       </div>
 
@@ -100,52 +101,52 @@ export default function AdminPage() {
           {/* Users Management */}
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-              User Management
+              {t('admin.userManagement')}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
-              View, verify, and manage user accounts
+              {t('admin.userManagement')}
             </p>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              View Users
+              {t('admin.viewUsers')}
             </button>
           </div>
 
           {/* Jobs Management */}
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-              Job Management
+              {t('admin.jobsManagement')}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
-              Approve, reject, and moderate job listings
+              {t('admin.jobsManagement')}
             </p>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Manage Jobs
+              {t('admin.manageJobs')}
             </button>
           </div>
 
           {/* Analytics */}
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-              Analytics
+              {t('admin.analytics')}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
-              View platform statistics and metrics
+              {t('admin.analytics')}
             </p>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              View Analytics
+              {t('admin.viewAnalytics')}
             </button>
           </div>
 
           {/* Reports */}
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-              Reported Content
+              {t('admin.reports')}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-4">
-              Review and take action on reported content
+              {t('admin.reports')}
             </p>
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              View Reports
+              {t('admin.viewReports')}
             </button>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/lib/store';
 import { toast } from 'sonner';
+import { t } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2 } from 'lucide-react';
@@ -29,9 +30,9 @@ export default function SettingsPage() {
     try {
       // TODO: Update profile in Supabase
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success('Profile updated successfully');
+      toast.success(t('settings.profileSaved'));
     } catch (error) {
-      toast.error('Failed to update profile');
+      toast.error(t('settings.profileSaveFailed'));
     } finally {
       setLoading(false);
     }
@@ -46,17 +47,17 @@ export default function SettingsPage() {
     const confirmPassword = (formElement.elements.namedItem('confirmPassword') as HTMLInputElement)?.value;
 
     if (newPassword !== confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error(t('settings.passwordMismatch'));
       setLoading(false);
       return;
     }
 
     try {
       await supabase.auth.updateUser({ password: newPassword });
-      toast.success('Password updated successfully');
+      toast.success(t('settings.passwordUpdated'));
       formElement.reset();
     } catch (error) {
-      toast.error('Failed to update password');
+      toast.error(t('settings.passwordUpdateFailed'));
     } finally {
       setLoading(false);
     }
@@ -65,9 +66,9 @@ export default function SettingsPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Settings</h1>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{t('settings.title')}</h1>
         <p className="text-slate-600 dark:text-slate-400 mt-2">
-          Manage your account and preferences
+          {t('settings.subtitle')}
         </p>
       </div>
 
@@ -75,18 +76,18 @@ export default function SettingsPage() {
         {/* Profile Settings */}
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-            Profile Settings
+            {t('settings.profileSettings')}
           </h2>
           <form onSubmit={handleSaveProfile} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Email
+                {t('settings.email')}
               </label>
               <Input value={user?.email} disabled />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Username
+                {t('settings.username')}
               </label>
               <Input
                 name="username"
@@ -97,7 +98,7 @@ export default function SettingsPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Phone
+                {t('settings.phone')}
               </label>
               <Input
                 name="phone"
@@ -108,7 +109,7 @@ export default function SettingsPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                WhatsApp
+                {t('settings.whatsapp')}
               </label>
               <Input
                 name="whatsapp"
@@ -125,10 +126,10 @@ export default function SettingsPage() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Saving...
+                  {t('settings.saveProfile')}
                 </>
               ) : (
-                'Save Profile'
+                t('settings.saveProfile')
               )}
             </Button>
           </form>
@@ -137,12 +138,12 @@ export default function SettingsPage() {
         {/* Password Settings */}
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-            Change Password
+            {t('settings.changePassword')}
           </h2>
           <form onSubmit={handleChangePassword} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                New Password
+                {t('settings.newPassword')}
               </label>
               <Input
                 type="password"
@@ -153,7 +154,7 @@ export default function SettingsPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Confirm Password
+                {t('settings.confirmPassword')}
               </label>
               <Input
                 type="password"
@@ -170,10 +171,10 @@ export default function SettingsPage() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Updating...
+                  {t('settings.updatePassword')}
                 </>
               ) : (
-                'Update Password'
+                t('settings.updatePassword')
               )}
             </Button>
           </form>

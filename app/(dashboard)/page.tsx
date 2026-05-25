@@ -3,30 +3,31 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Briefcase, MessageSquare, Users, TrendingUp } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 export default function DashboardPage() {
   const stats = [
     {
       icon: Briefcase,
-      label: 'Active Jobs',
+      label: t('dashboard.stats.activeJobs'),
       value: '24',
       color: 'text-blue-600',
     },
     {
       icon: Users,
-      label: 'Profile Views',
+      label: t('dashboard.stats.profileViews'),
       value: '156',
       color: 'text-purple-600',
     },
     {
       icon: MessageSquare,
-      label: 'Messages',
+      label: t('dashboard.stats.messages'),
       value: '8',
       color: 'text-green-600',
     },
     {
       icon: TrendingUp,
-      label: 'Match Score',
+      label: t('dashboard.stats.matchScore'),
       value: '92%',
       color: 'text-orange-600',
     },
@@ -36,10 +37,10 @@ export default function DashboardPage() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-          Dashboard
+          {t('dashboard.title')}
         </h1>
         <p className="text-slate-600 dark:text-slate-400 mt-2">
-          Welcome back! Here's what's happening with your account.
+          {t('dashboard.subtitle')}
         </p>
       </div>
 
@@ -74,17 +75,17 @@ export default function DashboardPage() {
           transition={{ delay: 0.4 }}
           className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-8 border border-blue-200 dark:border-blue-700"
         >
-          <h2 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-4">
-            Looking for Work?
+            <h2 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-4">
+            {t('dashboard.quickActions.lookingForWorkTitle')}
           </h2>
           <p className="text-blue-800 dark:text-blue-300 mb-4">
-            Browse thousands of job opportunities matched to your skills.
+            {t('dashboard.quickActions.lookingForWorkSubtitle')}
           </p>
-          <Link
+            <Link
             href="/jobs"
             className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
           >
-            Browse Jobs
+            {t('dashboard.quickActions.browseJobs')}
           </Link>
         </motion.div>
 
@@ -94,17 +95,17 @@ export default function DashboardPage() {
           transition={{ delay: 0.5 }}
           className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-8 border border-purple-200 dark:border-purple-700"
         >
-          <h2 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-4">
-            Chat with AI Assistant
+            <h2 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-4">
+            {t('dashboard.quickActions.chatTitle')}
           </h2>
           <p className="text-purple-800 dark:text-purple-300 mb-4">
-            Let our AI help you find the perfect match with conversational AI.
+            {t('dashboard.quickActions.chatSubtitle')}
           </p>
-          <Link
+            <Link
             href="/dashboard/chat"
             className="inline-block px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
           >
-            Start Chat
+            {t('dashboard.quickActions.startChat')}
           </Link>
         </motion.div>
       </div>

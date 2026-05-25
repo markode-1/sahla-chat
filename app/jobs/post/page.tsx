@@ -7,6 +7,7 @@ import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { t } from '@/lib/i18n';
 
 export default function PostJobPage() {
   const router = useRouter();
@@ -33,10 +34,10 @@ export default function PostJobPage() {
     try {
       // TODO: Connect to Supabase API
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success('Job posted successfully!');
+      toast.success(t('postJob.postJob'));
       router.push('/jobs');
     } catch (error) {
-      toast.error('Failed to post job');
+      toast.error(t('jobs.noJobsFound'));
     } finally {
       setLoading(false);
     }
@@ -52,14 +53,14 @@ export default function PostJobPage() {
             className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-6 font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Jobs
+            {t('postJob.backToJobs')}
           </Link>
 
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-            Post a New Job
+            {t('postJob.title')}
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
-            Fill in the details below to create a job listing
+            {t('postJob.subtitle')}
           </p>
         </div>
       </div>
@@ -70,7 +71,7 @@ export default function PostJobPage() {
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Job Title
+              {t('postJob.jobTitle')}
             </label>
             <Input
               type="text"
@@ -85,7 +86,7 @@ export default function PostJobPage() {
           {/* Category */}
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Category
+              {t('postJob.category')}
             </label>
             <select
               name="category"
@@ -107,7 +108,7 @@ export default function PostJobPage() {
           {/* Location */}
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Location
+              {t('postJob.location')}
             </label>
             <Input
               type="text"
@@ -122,7 +123,7 @@ export default function PostJobPage() {
           {/* Job Type */}
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Job Type
+              {t('postJob.jobType')}
             </label>
             <select
               name="jobType"
@@ -141,7 +142,7 @@ export default function PostJobPage() {
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Minimum Salary
+                {t('postJob.minimumSalary')}
               </label>
               <Input
                 type="number"
@@ -153,7 +154,7 @@ export default function PostJobPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Maximum Salary
+                {t('postJob.maximumSalary')}
               </label>
               <Input
                 type="number"
@@ -168,7 +169,7 @@ export default function PostJobPage() {
           {/* Description */}
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Job Description
+              {t('postJob.jobDescription')}
             </label>
             <textarea
               name="description"
@@ -188,13 +189,13 @@ export default function PostJobPage() {
               disabled={loading}
               className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600"
             >
-              {loading ? (
+                  {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Posting...
+                  {t('postJob.postJob') + '...'}
                 </>
               ) : (
-                'Post Job'
+                t('postJob.postJob')
               )}
             </Button>
             <Button
@@ -202,7 +203,7 @@ export default function PostJobPage() {
               variant="outline"
               onClick={() => router.back()}
             >
-              Cancel
+                  {t('postJob.cancel')}
             </Button>
           </div>
         </form>

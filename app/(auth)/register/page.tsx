@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader2, ArrowLeft } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -23,14 +24,14 @@ export default function RegisterPage() {
     setError(null);
 
     if (password !== confirmPassword) {
-      const message = 'Passwords do not match';
+      const message = t('auth.passwordMismatch');
       setError(message);
       toast.error(message);
       return;
     }
 
     if (password.length < 6) {
-      const message = 'Password must be at least 6 characters';
+      const message = t('auth.passwordTooShort');
       setError(message);
       toast.error(message);
       return;
@@ -46,10 +47,10 @@ export default function RegisterPage() {
 
       if (error) throw error;
 
-      toast.success('Account created! Please check your email to verify.');
-      router.push('/auth/verify-email');
+      toast.success(t('auth.accountCreated'));
+      router.push('/verify-email');
     } catch (err: any) {
-      const message = err.message || 'Registration failed';
+      const message = err.message || t('auth.registrationFailed');
       setError(message);
       toast.error(message);
     } finally {
@@ -63,13 +64,13 @@ export default function RegisterPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+          redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/callback`,
         },
       });
 
       if (error) throw error;
     } catch (err: any) {
-      const message = err.message || 'Google signup failed';
+      const message = err.message || t('auth.googleSignupFailed');
       setError(message);
       toast.error(message);
     } finally {
@@ -86,24 +87,24 @@ export default function RegisterPage() {
           className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back
+          {t('auth.back')}
         </Link>
 
         {/* Card */}
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-              Create Account
+              {t('auth.createAccount')}
             </h1>
             <p className="text-slate-600 dark:text-slate-400">
-              Join Sahla AI and start connecting
+              {t('auth.signUpSubtitle')}
             </p>
           </div>
 
           <form onSubmit={handleRegister} className="space-y-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Email
+                {t('auth.email')}
               </label>
               <Input
                 type="email"
@@ -117,7 +118,7 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Password
+                {t('auth.password')}
               </label>
               <Input
                 type="password"
@@ -131,7 +132,7 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Confirm Password
+                {t('auth.confirmPassword')}
               </label>
               <Input
                 type="password"
@@ -151,10 +152,10 @@ export default function RegisterPage() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Creating account...
+                  {t('auth.creatingAccount')}
                 </>
               ) : (
-                'Create Account'
+                t('auth.createAccount')
               )}
             </Button>
           </form>
@@ -165,7 +166,7 @@ export default function RegisterPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white dark:bg-slate-800 text-slate-500">
-                Or sign up with
+                {t('auth.orContinueWith')}
               </span>
             </div>
           </div>
@@ -176,16 +177,16 @@ export default function RegisterPage() {
             variant="outline"
             className="w-full"
           >
-            Sign up with Google
+            {t('auth.signUpWithGoogle')}
           </Button>
 
           <p className="text-center text-slate-600 dark:text-slate-400 mt-6">
-            Already have an account?{' '}
+            {t('auth.haveAccount')}{' '}
             <Link
-              href="/auth/login"
+              href="/login"
               className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
             >
-              Sign in
+              {t('auth.signIn')}
             </Link>
           </p>
         </div>

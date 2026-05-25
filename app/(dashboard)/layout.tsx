@@ -7,6 +7,7 @@ import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/lib/store';
 import { Menu, X, LogOut, Home, MessageSquare, Briefcase, Settings, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { t } from '@/lib/i18n';
 
 export default function DashboardLayout({
   children,
@@ -25,7 +26,7 @@ export default function DashboardLayout({
       } = await supabase.auth.getSession();
 
       if (!session) {
-        router.push('/auth/login');
+        router.push('/login');
         return;
       }
 
@@ -61,10 +62,10 @@ export default function DashboardLayout({
   }
 
   const navItems = [
-    { icon: Home, label: 'Dashboard', href: '/dashboard' },
-    { icon: MessageSquare, label: 'Chat', href: '/dashboard/chat' },
-    { icon: Briefcase, label: 'Jobs', href: '/jobs' },
-    { icon: Settings, label: 'Settings', href: '/dashboard/settings' },
+    { icon: Home, label: t('sidebar.dashboard'), href: '/dashboard' },
+    { icon: MessageSquare, label: t('sidebar.chat'), href: '/dashboard/chat' },
+    { icon: Briefcase, label: t('sidebar.jobs'), href: '/jobs' },
+    { icon: Settings, label: t('sidebar.settings'), href: '/dashboard/settings' },
   ];
 
   return (
@@ -80,7 +81,7 @@ export default function DashboardLayout({
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg">Sahla AI</span>
+            <span className="font-bold text-lg">{t('app.name')}</span>
           </Link>
         </div>
 
@@ -104,7 +105,7 @@ export default function DashboardLayout({
             className="w-full justify-start"
           >
             <LogOut className="w-5 h-5 mr-2" />
-            Logout
+            {t('sidebar.logout')}
           </Button>
         </div>
       </div>

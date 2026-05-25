@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, Users, MessageSquare, Briefcase } from 'lucide-react';
+import { t } from '@/lib/i18n';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -37,20 +38,20 @@ export default function Home() {
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold">Sahla Chat</span>
+            <span className="text-xl font-bold">{t('app.name')}</span>
           </div>
           <div className="flex items-center gap-4">
             <Link
-              href="/auth/login"
+              href="/login"
               className="px-4 py-2 text-sm font-medium hover:text-slate-600 dark:hover:text-slate-400"
             >
-              Login
+              {t('auth.signIn')}
             </Link>
             <Link
-              href="/auth/register"
+              href="/register"
               className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium hover:shadow-lg transition-shadow"
             >
-              Sign Up
+              {t('auth.signUp')}
             </Link>
           </div>
         </div>
@@ -75,10 +76,10 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Connect Through Chat
+              {t('home.hero.title')}
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-                AI-Powered Marketplace
+                {t('home.hero.highlight')}
               </span>
             </motion.h1>
 
@@ -88,8 +89,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Sahla Chat connects job seekers, service providers, clients, and
-              professionals through intelligent AI-powered conversations and matching
+              {t('home.hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -99,16 +99,16 @@ export default function Home() {
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               <Link
-                href="/auth/register"
+                href="/register"
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-xl transition-shadow flex items-center justify-center gap-2"
               >
-                Get Started <ArrowRight className="w-4 h-4" />
+                {t('auth.getStarted')} <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/auth/login"
+                href="/login"
                 className="px-8 py-4 border border-slate-300 dark:border-slate-700 rounded-lg font-semibold hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
               >
-                Sign In
+                {t('auth.signIn')}
               </Link>
             </motion.div>
           </motion.div>
@@ -126,11 +126,10 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Why Choose Sahla Chat?
+              {t('home.features.title')}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Our platform combines cutting-edge AI technology with a seamless
-              user experience
+              {t('home.features.subtitle')}
             </p>
           </motion.div>
 
@@ -144,23 +143,23 @@ export default function Home() {
             {[
               {
                 icon: <MessageSquare className="w-8 h-8" />,
-                title: 'AI Chat Assistant',
-                desc: 'Intelligent conversations that understand your needs',
+                title: t('home.features.aiChatTitle'),
+                desc: t('home.features.aiChatDesc'),
               },
               {
                 icon: <Briefcase className="w-8 h-8" />,
-                title: 'Smart Matching',
-                desc: 'AI-powered job and service matching',
+                title: t('home.features.smartMatchTitle'),
+                desc: t('home.features.smartMatchDesc'),
               },
               {
                 icon: <Users className="w-8 h-8" />,
-                title: 'Community',
-                desc: 'Connect with verified professionals',
+                title: t('home.features.communityTitle'),
+                desc: t('home.features.communityDesc'),
               },
               {
                 icon: <Zap className="w-8 h-8" />,
-                title: 'Lightning Fast',
-                desc: 'Real-time updates and notifications',
+                title: t('home.features.fastTitle'),
+                desc: t('home.features.fastDesc'),
               },
             ].map((feature, idx) => (
               <motion.div
@@ -189,17 +188,16 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to Transform Your Career?
+            {t('home.cta.title')}
           </h2>
           <p className="text-blue-100 mb-8">
-            Join thousands of professionals finding their perfect match with
-            Sahla Chat
+            {t('home.cta.subtitle')}
           </p>
           <Link
-            href="/auth/register"
+            href="/register"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
           >
-            Get Started Free <ArrowRight className="w-4 h-4" />
+            {t('home.cta.button')} <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
       </section>
@@ -216,13 +214,13 @@ export default function Home() {
             </div>
             <div className="flex gap-8 text-sm text-slate-600 dark:text-slate-400">
               <Link href="#" className="hover:text-slate-900 dark:hover:text-slate-200">
-                Privacy
+                {t('common.privacy')}
               </Link>
               <Link href="#" className="hover:text-slate-900 dark:hover:text-slate-200">
-                Terms
+                {t('common.terms')}
               </Link>
               <Link href="#" className="hover:text-slate-900 dark:hover:text-slate-200">
-                Contact
+                {t('common.contact')}
               </Link>
             </div>
           </div>

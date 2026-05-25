@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Briefcase, MapPin, DollarSign, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { t } from '@/lib/i18n';
 
 interface JobCard {
   id: string;
@@ -75,14 +76,14 @@ export default function JobsPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-                Job Opportunities
+                {t('jobs.title')}
               </h1>
               <p className="text-slate-600 dark:text-slate-400 mt-2">
-                Browse and apply to positions matched to your skills
+                {t('jobs.subtitle')}
               </p>
             </div>
             <Link href="/jobs/post" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Post a Job
+              {t('jobs.postJob')}
             </Link>
           </div>
 
@@ -92,13 +93,13 @@ export default function JobsPage() {
               <Search className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
               <Input
                 type="text"
-                placeholder="Search jobs, companies, locations..."
+                placeholder={t('jobs.searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
               />
             </div>
-            <Button variant="outline">Filter</Button>
+            <Button variant="outline">{t('jobs.filter')}</Button>
           </div>
         </div>
       </div>
@@ -109,7 +110,7 @@ export default function JobsPage() {
           <div className="text-center py-12">
             <Briefcase className="w-12 h-12 text-slate-400 mx-auto mb-4" />
             <p className="text-slate-600 dark:text-slate-400">
-              No jobs found matching your search.
+              {t('jobs.noJobsFound')}
             </p>
           </div>
         ) : (
@@ -153,7 +154,7 @@ export default function JobsPage() {
                     </div>
 
                     <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
-                      View Details
+                      {t('jobs.viewDetails')}
                     </Button>
                   </div>
                 </Link>

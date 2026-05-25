@@ -5,6 +5,7 @@ import { Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { t } from '@/lib/i18n';
 
 interface Message {
   id: string;
@@ -18,8 +19,7 @@ export default function ChatPage() {
     {
       id: '1',
       sender: 'assistant',
-      content:
-        'Hello! Welcome to Sahla AI. I\'m here to help you find the perfect opportunity. Are you looking for a job, or do you want to offer a service?',
+      content: t('chat.welcome'),
       timestamp: new Date().toISOString(),
     },
   ]);
@@ -65,7 +65,7 @@ export default function ChatPage() {
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
-      toast.error('Failed to send message');
+      toast.error(t('chat.sendFailed'));
     } finally {
       setLoading(false);
     }
@@ -115,10 +115,10 @@ export default function ChatPage() {
       {/* Input Area */}
       <div className="border-t border-slate-200 dark:border-slate-800 p-6">
         <form onSubmit={handleSendMessage} className="flex gap-2">
-          <Input
+            <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
+            placeholder={t('chat.inputPlaceholder')}
             disabled={loading}
             className="flex-1"
           />

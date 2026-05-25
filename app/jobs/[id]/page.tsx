@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { t } from '@/lib/i18n';
 
 export default function JobDetailPage() {
   const params = useParams();
@@ -60,15 +61,15 @@ export default function JobDetailPage() {
 
   const handleSave = () => {
     setSaved(!saved);
-    toast.success(saved ? 'Removed from saved' : 'Saved to your list');
+    toast.success(saved ? t('jobDetail.removeSaved') : t('jobDetail.save'));
   };
 
   const handleShare = () => {
-    toast.success('Link copied to clipboard');
+    toast.success(t('jobDetail.share'));
   };
 
   const handleApply = () => {
-    toast.success('Application submitted!');
+    toast.success(t('jobDetail.applyNow'));
   };
 
   return (
@@ -76,12 +77,12 @@ export default function JobDetailPage() {
       {/* Header */}
       <div className="border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-6 py-8">
-          <Link
+            <Link
             href="/jobs"
             className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-6 font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Jobs
+            {t('jobDetail.backToJobs')}
           </Link>
 
           <div className="flex items-start justify-between mb-6">
@@ -109,7 +110,7 @@ export default function JobDetailPage() {
             </div>
 
             <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium rounded-full">
-              Active
+              {t('jobDetail.active')}
             </span>
           </div>
 
@@ -143,7 +144,7 @@ export default function JobDetailPage() {
           <div className="md:col-span-2">
             <div className="prose dark:prose-invert max-w-none">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-                About This Role
+                {t('jobDetail.aboutRole')}
               </h2>
               <div className="text-slate-600 dark:text-slate-400 whitespace-pre-line leading-relaxed">
                 {job.fullDescription}
@@ -156,12 +157,12 @@ export default function JobDetailPage() {
             {/* Company Info Card */}
             <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 mb-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
-                Company Info
+                {t('jobDetail.companyInfo')}
               </h3>
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
-                    Company Name
+                    {t('jobDetail.companyName')}
                   </p>
                   <p className="font-medium text-slate-900 dark:text-white">
                     {job.company}
@@ -169,7 +170,7 @@ export default function JobDetailPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
-                    Posted Date
+                    {t('jobDetail.postedDate')}
                   </p>
                   <p className="font-medium text-slate-900 dark:text-white">
                     {new Date(job.postedDate).toLocaleDateString()}
@@ -177,10 +178,10 @@ export default function JobDetailPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
-                    Applicants
+                    {t('jobDetail.applicants')}
                   </p>
                   <p className="font-medium text-slate-900 dark:text-white">
-                    {job.applicants} people
+                    {job.applicants} {t('jobDetail.applicants')}
                   </p>
                 </div>
               </div>
@@ -189,15 +190,15 @@ export default function JobDetailPage() {
             {/* Contact Card */}
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
-                Contact Recruiter
+                {t('jobDetail.contactRecruiter')}
               </h3>
               <Button className="w-full mb-3 bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2">
                 <MessageSquare className="w-4 h-4" />
-                Send Message
+                {t('jobDetail.sendMessage')}
               </Button>
               <Button variant="outline" className="w-full flex items-center justify-center gap-2">
                 <Phone className="w-4 h-4" />
-                Call Recruiter
+                {t('jobDetail.callRecruiter')}
               </Button>
             </div>
           </div>
