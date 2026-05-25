@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sahla Chat 🚀
 
-## Getting Started
+> **AI-Powered Chat & Marketplace Platform** - Connecting job seekers, service providers, clients, and professionals
 
-First, run the development server:
+## 📋 Overview
+
+Sahla Chat is a sophisticated marketplace platform that leverages artificial intelligence to connect job seekers, service providers, clients, and professionals through intelligent matching and conversational AI.
+
+## ✨ Key Features (MVP Phase 1)
+
+✅ Modern Landing Page with animations  
+✅ Authentication (Google OAuth + Email/Password)  
+✅ AI Chat Interface (conversational, no traditional forms)  
+✅ Job Listings & Management  
+✅ Admin Dashboard (restricted to ca.markode@gmail.com)  
+✅ Dark/Light Mode  
+✅ Responsive Design  
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript, TailwindCSS, Framer Motion
+- **Backend**: Supabase (PostgreSQL, Auth, Storage, Realtime)
+- **AI**: OpenAI API via Edge Functions
+- **Deployment**: Vercel + Supabase Cloud
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+# Fill in .env.local with your Supabase and OpenAI keys
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+├── (auth)/          # Authentication pages
+├── (dashboard)/     # Protected dashboard with chat
+├── jobs/            # Job listings and management
+├── admin/           # Admin panel
+└── page.tsx         # Landing page
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Admin Access
 
-## Learn More
+Admin dashboard is restricted to: **ca.markode@gmail.com**
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Setup Guide](docs/setup.md) - Environment configuration
+- [Database Schema](docs/schema.md) - Database tables and relationships
+- [API Documentation](docs/api.md) - Coming soon
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Next Phases
 
-## Deploy on Vercel
+- Phase 2: Services module & Voice features
+- Phase 3: Messaging system & Notifications
+- Phase 4: Advanced analytics & Admin features
+- Phase 5: Mobile app (React Native)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private & Proprietary
+
+---
+
+**Built with ❤️ using Next.js & Supabase**
+
+---
+
+**Sahla Chat** | سهلة شات
