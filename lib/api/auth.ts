@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase';
-import { User, Profile } from '@/types';
+import { Profile } from '@/types';
 
-export async function getCurrentUser(): Promise<User | null> {
+export async function getCurrentUser(): Promise<Profile | null> {
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -9,9 +9,9 @@ export async function getCurrentUser(): Promise<User | null> {
   if (!session?.user) return null;
 
   const { data } = await supabase
-    .from('users')
+    .from('profiles')
     .select('*')
-    .eq('auth_user_id', session.user.id)
+    .eq('user_id', session.user.id)
     .single();
 
   return data;

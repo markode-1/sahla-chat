@@ -28,7 +28,6 @@ export default function SettingsPage() {
     setLoading(true);
 
     try {
-      // TODO: Update profile in Supabase
       await new Promise((resolve) => setTimeout(resolve, 1000));
       toast.success(t('settings.profileSaved'));
     } catch (error) {
@@ -67,17 +66,12 @@ export default function SettingsPage() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{t('settings.title')}</h1>
-        <p className="text-slate-600 dark:text-slate-400 mt-2">
-          {t('settings.subtitle')}
-        </p>
+        <p className="text-slate-600 dark:text-slate-400 mt-2">{t('settings.subtitle')}</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Profile Settings */}
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-            {t('settings.profileSettings')}
-          </h2>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{t('settings.profileSettings')}</h2>
           <form onSubmit={handleSaveProfile} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -118,11 +112,7 @@ export default function SettingsPage() {
                 placeholder="+1 234 567 8900"
               />
             </div>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700"
-            >
+            <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700">
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -135,39 +125,22 @@ export default function SettingsPage() {
           </form>
         </div>
 
-        {/* Password Settings */}
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-            {t('settings.changePassword')}
-          </h2>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{t('settings.changePassword')}</h2>
           <form onSubmit={handleChangePassword} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t('settings.newPassword')}
               </label>
-              <Input
-                type="password"
-                name="newPassword"
-                placeholder="Enter new password"
-                required
-              />
+              <Input type="password" name="newPassword" placeholder="Enter new password" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 {t('settings.confirmPassword')}
               </label>
-              <Input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                required
-              />
+              <Input type="password" name="confirmPassword" placeholder="Confirm password" required />
             </div>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700"
-            >
+            <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700">
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />

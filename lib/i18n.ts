@@ -10,6 +10,9 @@ export type I18nKey =
   | 'auth.email'
   | 'auth.password'
   | 'auth.forgotPassword'
+  | 'auth.forgotPasswordTitle'
+  | 'auth.forgotPasswordDescription'
+  | 'auth.forgotPasswordSent'
   | 'auth.signIn'
   | 'auth.orContinueWith'
   | 'auth.continueWithGoogle'
@@ -181,6 +184,9 @@ const dict: Record<Lang, Record<I18nKey, string>> = {
     'auth.email': 'Email',
     'auth.password': 'Password',
     'auth.forgotPassword': 'Forgot password?',
+    'auth.forgotPasswordTitle': 'Reset your password',
+    'auth.forgotPasswordDescription': 'Enter your email and we will send you a reset link.',
+    'auth.forgotPasswordSent': 'Password reset email sent. Check your inbox.',
     'auth.signIn': 'Sign In',
     'auth.orContinueWith': 'Or continue with',
     'auth.continueWithGoogle': 'Continue with Google',
@@ -350,6 +356,9 @@ const dict: Record<Lang, Record<I18nKey, string>> = {
     'auth.email': 'البريد الإلكتروني',
     'auth.password': 'كلمة المرور',
     'auth.forgotPassword': 'هل نسيت كلمة المرور؟',
+    'auth.forgotPasswordTitle': 'إعادة تعيين كلمة المرور',
+    'auth.forgotPasswordDescription': 'أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.',
+    'auth.forgotPasswordSent': 'تم إرسال بريد إعادة تعيين كلمة المرور. تحقق من صندوق الوارد.',
     'auth.signIn': 'تسجيل الدخول',
     'auth.orContinueWith': 'أو أكمل باستخدام',
     'auth.continueWithGoogle': 'تابع عبر Google',

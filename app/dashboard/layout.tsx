@@ -8,6 +8,7 @@ import { useAuthStore } from '@/lib/store';
 import { Menu, X, LogOut, Home, MessageSquare, Briefcase, Settings, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { t } from '@/lib/i18n';
+import { User } from '@/types';
 
 export default function DashboardLayout({
   children,
@@ -16,7 +17,7 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, setUser } = useAuthStore();
+  const { setUser, setProfile } = useAuthStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,26 +31,35 @@ export default function DashboardLayout({
         return;
       }
 
-      // Get user data from database
       const { data } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
-        .eq('auth_user_id', session.user.id)
+        .eq('user_id', session.user.id)
         .single();
 
       if (data) {
-        setUser(data);
+        setProfile(data);
+        setUser({
+          id: data.id,
+          email: session.user.email || '',
+          username: data?.username || '',
+          auth_user_id: session.user.id,
+          role: 'user',
+          created_at: data.created_at,
+          updated_at: data.updated_at,
+        } as User);
       }
 
       setLoading(false);
     };
 
     checkAuth();
-  }, [router, setUser]);
+  }, [router, setProfile, setUser]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
+    setProfile(null);
     router.push('/');
   };
 
@@ -70,7 +80,6 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen bg-white dark:bg-slate-950">
-      {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -99,54 +108,27 @@ export default function DashboardLayout({
         </nav>
 
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200 dark:border-slate-800">
-          <Button
-            onClick={handleLogout}
-            variant="ghost"
-            className="w-full justify-start"
-          >
+          <Button onClick={handleLogout} variant="ghost" className="w-full justify-start">
             <LogOut className="w-5 h-5 mr-2" />
             {t('sidebar.logout')}
           </Button>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Bar */}
         <div className="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 bg-white dark:bg-slate-900">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="lg:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
           >
-            {sidebarOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-
-          <div className="flex-1"></div>
-
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
-              {user?.email?.charAt(0).toUpperCase() || 'U'}
-            </div>
-          </div>
+          <div className="text-sm text-slate-500 dark:text-slate-400">{t('dashboard.subtitle')}</div>
+          <div />
         </div>
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950 p-6">{children}</main>
       </div>
-
-      {/* Overlay for mobile */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        ></div>
-      )}
     </div>
   );
 }
